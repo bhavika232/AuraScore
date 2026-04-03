@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400&display=swap');
+
+:root {
+  /* ── New 5-color palette ──────────────────────────────────── */
+  --indigo:        #300066;
+  --grape:         #8238B3;
+  --pale-purple:   #EFD9F7;
+  --gold:          #D7AC28;
+  --bronze:        #C78D17;
+
+  /* ── Backgrounds (Indigo-based) ───────────────────────────── */
+  --bg-void:       #1a0033;
+  --bg-deep:       #200044;
+  --bg-panel:      #280055;
+  --bg-card:       #300066;
+  --bg-card-hover: #3d007f;
+  --bg-input:      #1a0033;
+
+  /* ── Borders (Grape-based) ────────────────────────────────── */
+  --border-dim:    rgba(130, 56, 179, 0.10);
+  --border-mid:    rgba(130, 56, 179, 0.22);
+  --border-bright: rgba(130, 56, 179, 0.55);
+
+  /* ── Accent aliases (Grape replaces Cyan) ─────────────────── */
+  --cyan:          #8238B3;
+  --cyan-dim:      rgba(130, 56, 179, 0.12);
+  --cyan-glow:     rgba(130, 56, 179, 0.25);
+
+  /* ── Secondary accents (Gold / Bronze replace rainbow) ────── */
+  --magenta:       #D7AC28;
+  --magenta-dim:   rgba(215, 172, 40, 0.12);
+  --amber:         #C78D17;
+  --amber-dim:     rgba(199, 141, 23, 0.12);
+
+  /* ── Keep functional colors for error/success ─────────────── */
+  --green:         #00ff9d;
+  --green-dim:     rgba(0, 255, 157, 0.12);
+
+  /* ── Text (Pale Purple replaces blue-white) ───────────────── */
+  --text-primary:  #EFD9F7;
+  --text-secondary:rgba(239, 217, 247, 0.6);
+  --text-muted:    rgba(239, 217, 247, 0.35);
+  --text-accent:   #8238B3;
+
+  /* ── Typography ───────────────────────────────────────────── */
+  --font-display:  'Orbitron', monospace;
+  --font-body:     'Rajdhani', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+
+  /* ── Radii & transitions ──────────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Scanline overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.02) 2px,
+    rgba(0, 0, 0, 0.02) 4px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+a { color: var(--grape); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--text-primary); }
+
+button { font-family: var(--font-body); cursor: pointer; border: none; outline: none; }
+input, textarea { font-family: var(--font-body); outline: none; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-void); }
+::-webkit-scrollbar-thumb { background: var(--border-mid); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border-bright); }
+
+/* Utilities */
+.hud-line {
+  position: absolute;
+  background: var(--border-mid);
+}
+.hud-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--grape);
+  border-style: solid;
+}
+.hud-corner.tl { top: 0; left: 0; border-width: 1px 0 0 1px; }
+.hud-corner.tr { top: 0; right: 0; border-width: 1px 1px 0 0; }
+.hud-corner.bl { bottom: 0; left: 0; border-width: 0 0 1px 1px; }
+.hud-corner.br { bottom: 0; right: 0; border-width: 0 1px 1px 0; }
+
+@keyframes pulse-cyan {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes glitch {
+  0%, 100% { clip-path: inset(0 0 100% 0); }
+  20% { clip-path: inset(10% 0 60% 0); transform: translate(-2px); }
+  40% { clip-path: inset(40% 0 30% 0); transform: translate(2px); }
+  60% { clip-path: inset(70% 0 10% 0); transform: translate(-1px); }
+  80% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
