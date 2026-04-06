@@ -17,7 +17,8 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post("http://localhost:5002/api/login", { email, password });
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5002";
+      const res = await axios.post(`${API_URL}/api/login`, { email, password });
       const u = res.data.user;
       setUser(u);
       localStorage.setItem("aura_user", JSON.stringify(u));
@@ -29,7 +30,8 @@ export function AuthProvider({ children }) {
 
   const signup = async (name, email, password) => {
     try {
-      const res = await axios.post("http://localhost:5002/api/signup", { name, email, password });
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5002";
+      const res = await axios.post(`${API_URL}/api/signup`, { name, email, password });
       const u = res.data.user;
       setUser(u);
       localStorage.setItem("aura_user", JSON.stringify(u));

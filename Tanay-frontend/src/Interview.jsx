@@ -143,7 +143,8 @@ export default function Interview() {
       formData.append("video", blob, `interview.${ext}`);
 
       try {
-        const res = await axios.post("http://localhost:5000/analyze", formData, {
+        const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+        const res = await axios.post(`${API_URL}/analyze`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
