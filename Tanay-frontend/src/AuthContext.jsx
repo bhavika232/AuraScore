@@ -18,6 +18,7 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     try {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5002";
+      console.log("Using API_URL:", API_URL);
       const res = await axios.post(`${API_URL}/api/login`, { email, password });
       const u = res.data.user;
       setUser(u);
@@ -31,6 +32,7 @@ export function AuthProvider({ children }) {
   const signup = async (name, email, password) => {
     try {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5002";
+      console.log("Signup API_URL:", API_URL);
       const res = await axios.post(`${API_URL}/api/signup`, { name, email, password });
       const u = res.data.user;
       setUser(u);
