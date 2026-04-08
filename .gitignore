@@ -26,3 +26,4 @@ dist/
 *.swp
 .idea/
 .vscode/
+.vercel

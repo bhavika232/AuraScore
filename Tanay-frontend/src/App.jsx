@@ -39,7 +39,6 @@ export default function App() {
           <Route path="/confidence"  element={<ProtectedRoute><ConfidenceScore /></ProtectedRoute>} />
           <Route path="/practice"    element={<ProtectedRoute><PracticeMode /></ProtectedRoute>} />
           <Route path="/tips"        element={<ProtectedRoute><TipsCoaching /></ProtectedRoute>} />
-          <Route path="/history"     element={<ProtectedRoute><History /></ProtectedRoute>} />
           <Route path="/profile"     element={<ProtectedRoute><Profile /></ProtectedRoute>} />
 
           {/* 404 */}

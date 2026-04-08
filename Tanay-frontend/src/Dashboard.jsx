@@ -52,19 +52,8 @@ const MODULES = [
     statLabel: "OVERALL",
   },
   {
-    id: "history",
-    route: "/history",
-    icon: "◇",
-    color: BRONZE,
-    title: "SESSION HISTORY",
-    desc: "Review past interview sessions with full replay and analysis.",
-    tag: "ARCHIVE",
-    stat: "12",
-    statLabel: "SESSIONS",
-  },
-  {
     id: "practice",
-    route: "/practice",
+    route: "/interview",
     icon: "▷",
     color: GRAPE,
     title: "PRACTICE MODE",
@@ -86,18 +75,29 @@ const MODULES = [
   },
 ];
 
-const TOP_STATS = [
-  { label: "TOTAL SESSIONS", value: "12" },
-  { label: "AVG OVERALL SCORE", value: "74" },
-  { label: "BEST MODULE", value: "VOICE" },
-  { label: "STREAK", value: "3 DAYS" },
-];
-
 export default function Dashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const hour = new Date().getHours();
   const greeting = hour < 12 ? "GOOD MORNING" : hour < 18 ? "GOOD AFTERNOON" : "GOOD EVENING";
+
+  const userStats = user?.stats || { totalSessions: 0, avgScore: 0, bestModule: "NONE", streak: 0 };
+  const TOP_STATS = [
+    { label: "TOTAL SESSIONS", value: userStats.totalSessions || "0" },
+    { label: "AVG OVERALL SCORE", value: userStats.avgScore || "0" },
+    { label: "BEST MODULE", value: userStats.bestModule || "-" },
+    { label: "STREAK", value: userStats.streak ? `${userStats.streak} DAYS` : "0 DAYS" },
+  ];
+
+  const handleModuleClick = (m) => {
+    if (m.id === "practice") {
+        navigate("/interview");
+    } else if (["voice", "body", "eye-contact", "confidence", "tips"].includes(m.id)) {
+        navigate("/results", { state: { activeTab: m.id } });
+    } else {
+        navigate(m.route);
+    }
+  };
 
   return (
     <div style={S.page}>
@@ -108,7 +108,7 @@ export default function Dashboard() {
         {/* Header */}
         <div style={S.header}>
           <div>
-            <div style={S.greeting}>{greeting}, {user?.name?.toUpperCase()}</div>
+            <div style={S.greeting}>{greeting}, {user?.name?.toUpperCase() || "AGENT"}</div>
             <h1 style={S.title}>MISSION CONTROL</h1>
           </div>
           <button style={S.startBtn} onClick={() => navigate("/interview")}>
@@ -139,7 +139,7 @@ export default function Dashboard() {
         {/* Module cards */}
         <div style={S.grid7}>
           {MODULES.map((m, i) => (
-            <ModuleCard key={m.id} mod={m} index={i} onClick={() => navigate(m.route)} />
+            <ModuleCard key={m.id} mod={m} index={i} onClick={() => handleModuleClick(m)} />
           ))}
         </div>
       </div>

@@ -7,7 +7,6 @@ const PALE   = "#EFD9F7";
 
 const NAV_LINKS = [
   { to: "/dashboard", label: "DASHBOARD" },
-  { to: "/history",   label: "HISTORY" },
   { to: "/practice",  label: "PRACTICE" },
   { to: "/tips",      label: "COACHING" },
   { to: "/about",     label: "ABOUT" },

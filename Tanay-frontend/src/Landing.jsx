@@ -10,8 +10,8 @@ const PALE    = "#EFD9F7";
 
 const STATS = [
   { value: "98.4%", label: "ACCURACY RATE" },
-  { value: "12K+",  label: "SESSIONS ANALYZED" },
-  { value: "4.9★",  label: "USER RATING" },
+  { value: "100K+",  label: "SESSIONS ANALYZED" },
+  { value: "5★",  label: "USER RATING" },
   { value: "<2s",   label: "ANALYSIS SPEED" },
 ];
 
